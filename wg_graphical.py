@@ -13,6 +13,8 @@ For each sprinkler we are given:
 Q: What is the minimum number of sprinklers to turn on in order to water the entire strip of grass?
 """
 import math
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, Circle
 
 while True:
     try:
@@ -44,6 +46,13 @@ while True:
         print("-1")
         break
 
+    # sketch grass strip
+    fig, ax = plt.subplots()
+    ax.plot()
+    ax.add_patch(
+        Rectangle((0, 0), l, w, fill=False, color="green", alpha=0.5, linewidth=2)
+    )
+
     # start with no sprinklers, on the left side of the strip
     s = 0
     right = 0
@@ -57,7 +66,12 @@ while True:
         r = sprinkler[x]
         print(f"x: {x}, r: {r}")
 
+        ax.plot(x, w / 2, "bx")
+        plt.annotate(f" ({x}, {r})", (x, w / 2))
+        ax.add_patch(Circle((x, w / 2), r, alpha=0.3, facecolor="blue"))
         s += 1
         if right >= l:
             print(s)
+            plt.title(f"{l} x {w} strip needs {s} sprinklers")
+            plt.show()
             break
