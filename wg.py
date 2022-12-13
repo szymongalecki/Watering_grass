@@ -17,6 +17,7 @@ import math
 while True:
     try:
         n, end, w = [int(_) for _ in input().split()]
+        # print(n, end, w)
         sprinkler = dict()
         coverage = list()
     except (EOFError, ValueError):
@@ -33,6 +34,11 @@ while True:
         # covered rectangular area, left and right from position
         k = math.sqrt(math.pow(r, 2) - math.pow(w / 2, 2))
         coverage.append([x - k, x + k])
+
+    # all sprinklers were useless
+    if not coverage:
+        print(-1)
+        continue
 
     # sort by left side coverage
     coverage.sort()
@@ -80,7 +86,6 @@ while True:
             else:
                 print(-1)
                 break
-
 
 """
     Previous approach
